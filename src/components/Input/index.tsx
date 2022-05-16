@@ -15,11 +15,11 @@ type Props = {
   icon: IconType;
 };
 
-const Input = ({
+function Input({
   name,
   icon: Icon,
   ...rest
-}: Props) => {
+}: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isFocused, setIsFocused] = useState(false);
