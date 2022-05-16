@@ -12,7 +12,8 @@ import { Container } from './styles';
 
 type Props = {
   name: string;
-  icon: IconType;
+  icon?: IconType;
+  placeholder: string;
 };
 
 function Input({
