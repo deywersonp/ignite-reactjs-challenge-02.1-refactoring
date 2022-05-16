@@ -17,35 +17,38 @@ type Food = {
 
 type Props = {
   isOpen: boolean;
+  editingFood: Food;
   setIsOpen: () => void;
-  handleAddFood: (food: Food) => Promise<void>;
+  handleUpdateFood: (food: Food) => Promise<void>;
 };
 
-function ModalAddFood({
+function ModalEditFood({
   isOpen,
+  editingFood,
   setIsOpen,
-  handleAddFood,
+  handleUpdateFood,
 }: Props) {
 
   const formRef = useRef<FormHandles>(null);
 
   async function handleSubmit(data: Food) {
-    handleAddFood(data);
+    handleUpdateFood(data);
     setIsOpen();
   };
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-      <Form ref={formRef} onSubmit={handleSubmit}>
-        <h1>Novo Prato</h1>
+      <Form ref={formRef} onSubmit={handleSubmit} initialData={editingFood}>
+        <h1>Editar Prato</h1>
         <Input name="image" placeholder="Cole o link aqui" />
 
         <Input name="name" placeholder="Ex: Moda Italiana" />
         <Input name="price" placeholder="Ex: 19.90" />
 
         <Input name="description" placeholder="Descrição" />
-        <button type="submit" data-testid="add-food-button">
-          <p className="text">Adicionar Prato</p>
+
+        <button type="submit" data-testid="edit-food-button">
+          <div className="text">Editar Prato</div>
           <div className="icon">
             <FiCheckSquare size={24} />
           </div>
@@ -55,4 +58,4 @@ function ModalAddFood({
   );
 };
 
-export default ModalAddFood;
+export default ModalEditFood;
